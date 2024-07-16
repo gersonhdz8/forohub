@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,5 +41,21 @@ public class Topic {
         this.nombreCurso = datosTopicDTO.nombreCurso();
         this.fechaCreacion = LocalDate.now();
         this.estado = true;
+    }
+
+    public void actualizarDatos(@Valid ActualizarTopicDTO actualizarTopicDTO) {
+        if (actualizarTopicDTO.titulo() != null) {
+            this.titulo = actualizarTopicDTO.titulo();
+        }
+        if (actualizarTopicDTO.mensaje() != null) {
+            this.mensaje = actualizarTopicDTO.mensaje();
+        }
+        if (actualizarTopicDTO.nombreCurso() != null) {
+            this.nombreCurso = actualizarTopicDTO.nombreCurso();
+        }
+    }
+
+    public void desactivarTopic() {
+        this.estado = false;
     }
 }
